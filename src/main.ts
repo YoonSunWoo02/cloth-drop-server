@@ -11,9 +11,9 @@ async function bootstrap() {
   // 유효성 검사 파이프
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,        // DTO에 없는 필드 자동 제거
+      whitelist: true, // DTO에 없는 필드 자동 제거
       forbidNonWhitelisted: true,
-      transform: true,        // 타입 자동 변환
+      transform: true, // 타입 자동 변환
     }),
   );
 
@@ -24,4 +24,4 @@ async function bootstrap() {
   await app.listen(port);
   console.log(`🚀 Server running on http://localhost:${port}/api/v1`);
 }
-bootstrap();
+void bootstrap();

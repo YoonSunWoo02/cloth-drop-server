@@ -1,4 +1,8 @@
-import { Injectable, ConflictException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -54,11 +58,13 @@ export class AuthService {
     const user = await this.userRepository.findOne({
       where: { email: dto.email },
     });
-    if (!user) throw new UnauthorizedException('이메일 또는 비밀번호가 틀렸습니다.');
+    if (!user)
+      throw new UnauthorizedException('이메일 또는 비밀번호가 틀렸습니다.');
 
     // 비밀번호 확인
     const isMatch = await bcrypt.compare(dto.password, user.passwordHash);
-    if (!isMatch) throw new UnauthorizedException('이메일 또는 비밀번호가 틀렸습니다.');
+    if (!isMatch)
+      throw new UnauthorizedException('이메일 또는 비밀번호가 틀렸습니다.');
 
     // 토큰 발급
     const payload = { sub: user.id, email: user.email };
